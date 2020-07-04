@@ -12,7 +12,7 @@ from open_seq2seq.optimizers.lr_policies import fixed_lr, transformer_policy, ex
 base_model = Text2SpeechTacotron
 
 dataset = "LJ"
-dataset_location = "/data/speech/LJSpeech"
+dataset_location = "/content/drive/My\ Drive/Interest/Speech-to-text/Datasets/LJSpeech/LJSpeech-1.1"
 output_type = "both"
 
 if dataset == "MAILABS":
@@ -24,7 +24,7 @@ if dataset == "MAILABS":
 elif dataset == "LJ":
   trim = False
   mag_num_feats = 513
-  train = "train_32.csv"
+  train = "train.csv"
   val = "val_32.csv"
   batch_size = 48
 else:
