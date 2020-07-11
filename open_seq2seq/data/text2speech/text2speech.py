@@ -26,7 +26,7 @@ class Text2SpeechDataLayer(DataLayer):
     return dict(
         DataLayer.get_required_params(), **{
             'dataset_location': str,
-            'dataset': ['LJ', 'MAILABS'],
+            'dataset': ['LJ', 'MAILABS', 'VIVOS'],
             'num_audio_features': None,
             'output_type': ['magnitude', 'mel', 'both'],
             'vocab_file': str,
@@ -138,6 +138,9 @@ class Text2SpeechDataLayer(DataLayer):
       self._sampling_rate = 22050
       self._n_fft = self.params.get("n_fft", 1024)
     elif self.params["dataset"] == "MAILABS":
+      self._sampling_rate = 16000
+      self._n_fft = 800
+    elif self.params["dataset"] == "VIVOS":
       self._sampling_rate = 16000
       self._n_fft = 800
 
