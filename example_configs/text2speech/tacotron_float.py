@@ -72,7 +72,7 @@ base_params = {
   "save_checkpoint_steps": 2500,
   "save_to_tensorboard": True,
   # "logdir": "result/tacotron-LJ-float",
-  "logdir": "/content/drive/My Drive/Interest/Speech processing/Models",
+  "logdir": "/content/drive/My Drive/Interest/Speech processing/Models/tacotron-vivos",
   "max_grad_norm":1.,
 
   "optimizer": "Adam",
