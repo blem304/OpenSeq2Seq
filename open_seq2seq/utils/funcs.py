@@ -170,6 +170,7 @@ def train(train_model, eval_model=None, debug_port=None, custom_hooks=None):
   step = 0
   num_bench_updates = 0
   while True:
+    print('Current step:', step)
     if sess.should_stop():
       break
     tm = time.time()
