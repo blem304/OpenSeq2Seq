@@ -27,6 +27,12 @@ elif dataset == "LJ":
   train = "train.csv"
   val = "val_32.csv"
   batch_size = 48
+elif dataset == "VIVOS":
+  trim = True
+  mag_num_feats = 401
+  train = "train.csv"
+  val = "val.csv"
+  batch_size = 32
 else:
   raise ValueError("Unknown dataset")
 
