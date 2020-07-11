@@ -174,6 +174,8 @@ def train(train_model, eval_model=None, debug_port=None, custom_hooks=None):
     if sess.should_stop():
       break
     tm = time.time()
+    
+    print('Begin try')
     try:
       feed_dict = {}
       iter_size = train_model.params.get('iter_size', 1)
@@ -182,21 +184,26 @@ def train(train_model, eval_model=None, debug_port=None, custom_hooks=None):
       if step % iter_size == 0:
         if step >= bench_start:
           num_bench_updates += 1
+        print('Run fetches')
         fetches_vals = sess.run(fetches, feed_dict)
       else:
         # necessary to skip "no-update" steps when iter_size > 1
         def run_with_no_hooks(step_context):
           return step_context.session.run(fetches, feed_dict)
+        print('Run step func')
         fetches_vals = sess.run_step_fn(run_with_no_hooks)
     except tf.errors.OutOfRangeError:
       break
     if step >= bench_start:
+      print('Step >= bench_start')
       total_time += time.time() - tm
       if len(fetches) > 1:
         for i in range(train_model.num_gpus):
           total_objects += np.sum(fetches_vals[i + 1])
+          
         if train_model.params['print_bench_info_steps'] is not None:
           if step % train_model.params['print_bench_info_steps'] == 0:
+            print('Collect_if_horovod')
             total_objects_cur = collect_if_horovod(total_objects, hvd,
                                                    mode="sum")
             if master_worker:
